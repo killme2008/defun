@@ -211,11 +211,11 @@ Uses the above function `accum` to compare a normal clojure function:
     ([n] (accum2 0 n))
     ([ret n] (if (= n 0) ret (recur (+ n ret) (dec n)))))
 
-(time (dotimes [_ 1000] (accum2 10000)))
-;; "Elapsed time: 812.614 msecs"
-;; nil
 (time (dotimes [_ 1000] (accum 10000)))
 ;; "Elapsed time: 4598.268 msecs"
+;; nil
+(time (dotimes [_ 1000] (accum2 10000)))
+;; "Elapsed time: 812.614 msecs"
 ;; nil
 ```
 
