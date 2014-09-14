@@ -24,7 +24,9 @@ Use `defun` in your namespace to define function just like `defn`:
 ;; "hello,defun"
 ```
 
-Funny is coming, let's say hi to people:
+Supports vardic arguments,doc,metadata etc. too.
+
+But the fun thing is coming, let's say hi to people:
 
 ```clj
 (defun say-hi
