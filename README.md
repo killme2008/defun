@@ -74,6 +74,17 @@ Invoke it:
 nil
 ```
 
+A accumulator from zero to number `n`:
+```clj
+    (defun accum
+      ([0 ret] ret)
+      ([n ret] (recur (dec n) (+ n ret)))
+      ([n] (recur n 0)))
+
+	 (accum 100)
+	 ;;5050
+```
+
 A fibonacci function:
 
 ```clj
@@ -128,9 +139,9 @@ In fact ,the above `say-hi` function will be expanded to be:
 (defn
  say-hi
  {:arglists '([& args])}
- [& arguments*]
+ [& args#]
  (clojure.core.match/match
-  [(vec arguments*)]
+  [(vec args#)]
   [[:dennis]]
   (do "Hi,good morning, dennis.")
   [[:catty]]
