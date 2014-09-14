@@ -74,7 +74,7 @@ Invoke it:
 nil
 ```
 
-A accumulator from zero to number `n`:
+An accumulator from zero to number `n`:
 ```clj
     (defun accum
       ([0 ret] ret)
