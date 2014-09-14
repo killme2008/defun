@@ -202,20 +202,24 @@ I don't want to copy the [core.match's wiki](https://github.com/clojure/core.mat
 Uses the above function `accum` to compare a normal clojure function:
 
 ```clj
-(defun accum2
-	([n] (accum2 0 n))
-	([ret n] (if (= n 0) ret (recur (+ n ret) (dec n)))))
+(defun accum
+  ([0 ret] ret)
+  ([n ret] (recur (dec n) (+ n ret)))
+  ([n] (recur n 0)))
+
+(defn accum2
+    ([n] (accum2 0 n))
+    ([ret n] (if (= n 0) ret (recur (+ n ret) (dec n)))))
 
 (time (dotimes [_ 1000] (accum2 10000)))
-;; "Elapsed time: 5878.644 msecs"
+;; "Elapsed time: 812.614 msecs"
 ;; nil
 (time (dotimes [_ 1000] (accum 10000)))
 ;; "Elapsed time: 4598.268 msecs"
 ;; nil
 ```
 
-It's amazing that accum is fast than accum2, core.match is really great.
-
+accum2 is faster than accum.That's not amazing. Pattern match has a tradeoff.
 
 ## License
 
