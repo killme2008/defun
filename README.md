@@ -7,7 +7,7 @@ A beautiful macro to define clojure functions.
 Dependency in leiningen:
 
 ```clj
-    [defun "0.1.0-SNAPSHOT"]
+    [defun "0.1.0-RC"]
 ```
 
 ### Basic usage
