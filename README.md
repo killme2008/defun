@@ -17,7 +17,9 @@ Use `defun` in your namespace to define function just like `defn`:
 ```clj
 (use '[defun :only [defun]])
 
-(defun hello [name] (str "hello," name))
+(defun hello
+   "hello world"
+   [name] (str "hello," name))
 (hello "defun")
 ;; "hello,defun"
 ```
@@ -26,7 +28,7 @@ Funny is coming, let's say hi to people:
 
 ```clj
 (defun say-hi
-  ([:dennis] "Hi,good monirning, dennis.")
+  ([:dennis] "Hi,good morning, dennis.")
   ([:catty] "Hi, catty, what time is it?")
   ([:green] "Hi,green, what a good day!")
   ([other] (str "Say hi to " other)))
@@ -36,7 +38,7 @@ Then calling `say-hi` with different names:
 
 ```clj
 (say-hi :dennis)
-;;  "Hi,good monirning, dennis."
+;;  "Hi,good morning, dennis."
 (say-hi :catty)
 ;;  "Hi, catty, what time is it?"
 (say-hi :green)
@@ -48,7 +50,7 @@ We define functions just like Erlang's function with parameters pattern match (t
 
 ### Recursion
 
-Let's move on, what about define a recursion function? That's easy too:
+Let's move on, what about define a recursive function? That's easy too:
 
 ```clj
 (defun count-down
@@ -76,7 +78,7 @@ A fibonacci function:
 (defun fib
     ([0] 0)
     ([1] 1)
-   ([n] (+ (fib (- n 1)) (fib (- n 2)))))
+    ([n] (+ (fib (- n 1)) (fib (- n 2)))))
 ```
 
 Output:
@@ -90,7 +92,7 @@ Of course it's not tail recursive, but it's really cool, isn't it?
 
 ## Guards
 
-Added a guard function to a parameter:
+Added a guard function to parameters:
 
 ```clj
 (defun funny
@@ -102,9 +104,9 @@ Added a guard function to a parameter:
 (funny 43)
 ;; false
 ```
-A function to detect if longitude  and latitude values are both valid:
+Another function to detect if longitude  and latitude values are both valid:
 
-```
+```clj
 (defun valid-geopoint?
     ([(_ :guard #(and (> % -180) (< % 180)))
       (_ :guard #(and (> % -90) (< % 90)))] true)
@@ -128,7 +130,7 @@ In fact ,the above `say-hi` function will be expanded to be:
  (clojure.core.match/match
   [(vec arguments*)]
   [[:dennis]]
-  (do "Hi,good monirning, dennis.")
+  (do "Hi,good morning, dennis.")
   [[:catty]]
   (do "Hi, catty, what time is it?")
   [[:green]]
@@ -137,7 +139,7 @@ In fact ,the above `say-hi` function will be expanded to be:
   (do (str "Say hi to " other))))
 ```
 
-The argument vector is a pattern in core.match, so we can use all patterns that supported by [core.match](https://github.com/clojure/core.match/wiki/Basic-usage).
+The argument vector is in fact a pattern in core.match, so we can use all patterns that supported by [core.match](https://github.com/clojure/core.match/wiki/Basic-usage).
 
 For example, matching literals
 

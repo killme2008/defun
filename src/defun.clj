@@ -1,9 +1,13 @@
 (ns defun
+  "defun: A beautiful macro to define clojure functions.
+    author:  dennis <killme2008@gmail.com>"
   (:use [clojure.core.match :only (match)]
         [clojure.walk :only [postwalk]]))
 
 (defmacro defun
   [name & fdecl]
+  "Define a function just like defn,but using core.match to match parameters.
+   See https://github.com/killme2008/defun for details."
   (let [m (if (string? (first fdecl))
             {:doc (first fdecl)}
             {})
