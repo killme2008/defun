@@ -1,4 +1,4 @@
-(defproject defun "0.1.0-RC"
+(defproject defun "0.2.0-SNAPSHOT"
   :description "A beautiful macro to define clojure functions"
   :url "https://github.com/killme2008/defun"
   :license {:name "Eclipse Public License"

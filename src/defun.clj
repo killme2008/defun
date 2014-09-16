@@ -105,3 +105,8 @@
                  (fn [form]
                    [[(first form)] (cons 'do (next form))])
                  fdecl)))))
+
+(defmacro defun-
+  "same as defun, yielding non-public def"
+  [name & decls]
+    (list* `defun (with-meta name (assoc (meta name) :private true)) decls))
