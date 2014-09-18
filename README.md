@@ -197,29 +197,29 @@ Rest Pattern, Map Pattern, Or Pattern etc.
 
 I don't want to copy the [core.match's wiki](https://github.com/clojure/core.match/wiki/Basic-usage),please visit it by yourself.
 
-## A simple performance benchmark
+## Criterium benchmarking
 
-Uses the above function `accum` to compare a normal clojure function:
+Uses the above function `accum` compared with a normal clojure function:
 
 ```clj
-(defun accum
+(require '[criterium.core :refer [bench])
+
+(defn accum-defn
+    ([n] (accum-defn 0 n))
+    ([ret n] (if (= n 0) ret (recur (+ n ret) (dec n)))))
+
+(defun accum-defun
   ([0 ret] ret)
   ([n ret] (recur (dec n) (+ n ret)))
   ([n] (recur n 0)))
 
-(defn accum2
-    ([n] (accum2 0 n))
-    ([ret n] (if (= n 0) ret (recur (+ n ret) (dec n)))))
-
-(time (dotimes [_ 1000] (accum 10000)))
-;; "Elapsed time: 4598.268 msecs"
-;; nil
-(time (dotimes [_ 1000] (accum2 10000)))
-;; "Elapsed time: 812.614 msecs"
-;; nil
+(bench (accum-defn 10000))
+;; Execution time mean : 297.433947 µs
+(bench (accum-defun 10000))
+;; Execution time mean : 4.247483 ms
 ```
 
-accum2 is faster than accum.That's not amazing. Pattern match has a tradeoff.
+accum-defn is faster than accum-defun. Pattern matching does have a tradeoff.
 
 ## License
 
