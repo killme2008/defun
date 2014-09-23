@@ -131,6 +131,10 @@ Another function to detect if longitude  and latitude values are both valid:
 ;; false
 ```
 
+### Private defun
+
+Of course, you can use `defun-` to define a function that is private just as `defn-`
+
 ### More Patterns
 
 In fact ,the above `say-hi` function will be expanded to be:
