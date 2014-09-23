@@ -1,13 +1,13 @@
 # defun
 
-A beautiful macro to define clojure functions.
+A macro to define clojure functions with pattern matching just as erlang or elixir.
 
 ## Usage
 
 Dependency in leiningen:
 
 ```clj
-    [defun "0.1.0-RC"]
+    [defun "0.1.0"]
 ```
 
 ### Basic usage
