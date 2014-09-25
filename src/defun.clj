@@ -58,4 +58,4 @@
 (defmacro defun-
   "same as defun, yielding non-public def"
   [name & decls]
-    (list* `defun (with-meta name (assoc (meta name) :private true)) decls))
+    (list* `defun (vary-meta name assoc :private true) decls))

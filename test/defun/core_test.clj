@@ -80,3 +80,9 @@
     ([([1 2] :seq)] :a1)
     ([([1 2 nil nil nil] :seq)] :a2))
     (is (= :a2 (test2 [1 2 nil nil nil])))))
+
+(deftest test-private-macro
+  (testing "test1"
+    (defun- test1
+      ([_]))
+    (is (:private (meta #'test1)))))
