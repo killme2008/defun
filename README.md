@@ -225,6 +225,13 @@ Uses the above function `accum` compared with a normal clojure function:
 
 accum-defn is faster than accum-defun. Pattern matching does have a tradeoff.
 
+## Contributors
+
+Thanks .
+
+* [kgann](https://github.com/kgann)
+* [danielcompton](https://github.com/danielcompton)
+
 ## License
 
 Copyright © 2014 [Dennis Zhuang](mailto:killme2008@gmail.com)
