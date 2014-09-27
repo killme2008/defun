@@ -21,7 +21,11 @@
                    form))
                body)]
     `(defn ~name [& args#]
-       (match (vec args#) ~@(apply concat body)))))
+       (match (vec args#)
+              ~@(mapcat
+                 (fn [[m & more]]
+                   [m (cons 'do more)])
+                 body)))))
 
 (defmacro defun-
   "same as defun, yielding non-public def"
