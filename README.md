@@ -30,10 +30,10 @@ But the fun thing is coming, let's say hi to people:
 
 ```clj
 (defun say-hi
-  ([:dennis] "Hi,good morning, dennis.")
-  ([:catty] "Hi, catty, what time is it?")
-  ([:green] "Hi,green, what a good day!")
-  ([other] (str "Say hi to " other)))
+  [:dennis] "Hi,good morning, dennis."
+  [:catty] "Hi, catty, what time is it?"
+  [:green] "Hi,green, what a good day!"
+  [other] (str "Say hi to " other))
 ```
 
 Then calling `say-hi` with different names:
@@ -56,9 +56,9 @@ Let's move on, what about define a recursive function? That's easy too:
 
 ```clj
 (defun count-down
-  ([0] (println "Reach zero!"))
-  ([n] (println n)
-     (recur (dec n))))
+  [0] (println "Reach zero!")
+  [n] (do (println n)
+          (recur (dec n))))
 ```
 
 Invoke it:
@@ -76,22 +76,22 @@ nil
 
 An accumulator from zero to number `n`:
 ```clj
-    (defun accum
-      ([0 ret] ret)
-      ([n ret] (recur (dec n) (+ n ret)))
-      ([n] (recur n 0)))
+(defun accum
+  [0 ret] ret
+  [n ret] (recur (dec n) (+ n ret))
+  [n] (recur n 0))
 
-	 (accum 100)
-	 ;;5050
+  (accum 100)
+  ;;5050
 ```
 
 A fibonacci function:
 
 ```clj
 (defun fib
-    ([0] 0)
-    ([1] 1)
-    ([n] (+ (fib (- n 1)) (fib (- n 2)))))
+  [0] 0
+  [1] 1
+  [n] (+ (fib (- n 1)) (fib (- n 2))))
 ```
 
 Output:
@@ -109,8 +109,8 @@ Added a guard function to parameters:
 
 ```clj
 (defun funny
-  ([(N :guard #(= 42 %))] true)
-  ([_] false))
+  [(N :guard #(= 42 %))] true
+  [_] false)
 
 (funny 42)
 ;;  true
@@ -121,9 +121,9 @@ Another function to detect if longitude  and latitude values are both valid:
 
 ```clj
 (defun valid-geopoint?
-    ([(_ :guard #(and (> % -180) (< % 180)))
-      (_ :guard #(and (> % -90) (< % 90)))] true)
-    ([_ _] false))
+  [(_ :guard #(and (> % -180) (< % 180)))
+   (_ :guard #(and (> % -90) (< % 90)))] true
+  [_ _] false)
 
 (valid-geopoint? 30 30)
 ;; true
@@ -162,10 +162,10 @@ For example, matching literals
 
 ```clj
 (defun test1
-    ([true false] 1)
-    ([true true] 2)
-    ([false true] 3)
-    ([false false] 4))
+  [true false] 1
+  [true true] 2
+  [false true] 3
+  [false false] 4)
 
 (test1 true true)
 ;; 2
@@ -177,9 +177,9 @@ Matching sequence:
 
 ```clj
 (defun test2
-    ([([1] :seq)] :a0)
-    ([([1 2] :seq)] :a1)
-    ([([1 2 nil nil nil] :seq)] :a2))
+  [([1] :seq)] :a0
+  [([1 2] :seq)] :a1
+  [([1 2 nil nil nil] :seq)] :a2)
 
 (test2 [1 2 nil nil nil])
 ;; a2
@@ -189,9 +189,9 @@ Matching vector:
 
 ```clj
 (defun test3
-    ([[_ _ 2]] :a0)
-    ([[1 1 3]] :a1)
-    ([[1 2 3]] :a2))
+  [[_ _ 2]] :a0
+  [[1 1 3]] :a1
+  [[1 2 3]] :a2)
 
 (test3 [1 2 3])
 ;; :a2
@@ -209,13 +209,13 @@ Uses the above function `accum` compared with a normal clojure function:
 (require '[criterium.core :refer [bench])
 
 (defn accum-defn
-    ([n] (accum-defn 0 n))
-    ([ret n] (if (= n 0) ret (recur (+ n ret) (dec n)))))
+  ([n] (accum-defn 0 n))
+  ([ret n] (if (= n 0) ret (recur (+ n ret) (dec n)))))
 
 (defun accum-defun
-  ([0 ret] ret)
-  ([n ret] (recur (dec n) (+ n ret)))
-  ([n] (recur n 0)))
+  [0 ret] ret
+  [n ret] (recur (dec n) (+ n ret))
+  [n] (recur n 0))
 
 (bench (accum-defn 10000))
 ;; Execution time mean : 297.433947 µs
