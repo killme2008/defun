@@ -86,3 +86,13 @@
     (defun- test1
       ([_]))
     (is (:private (meta #'test1)))))
+
+(deftest side-effects
+  (testing "test1"
+    (defun test1
+      ([1] 1)
+      ([x] (println "Square")
+           (* 2 x)))
+    (with-out-str
+      (is (= 4 (test1 2))))
+    (is (= "Square") (with-out-str (test1 2)))))
