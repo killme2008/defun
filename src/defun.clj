@@ -14,13 +14,16 @@
         body (if (vector? (first body))
                (list body)
                body)
+        m (-> name
+              meta
+              (assoc :arglists (list 'quote (@#'clojure.core/sigs body))))
         body (postwalk
                (fn [form]
                  (if (and (list? form) (= 'recur (first form)))
                    (list 'recur (cons 'vector (next form)))
                    form))
                body)]
-    `(defn ~name [& args#]
+    `(defn ~name ~m [& args#]
        (match (vec args#)
               ~@(mapcat
                  (fn [[m & more]]

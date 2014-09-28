@@ -82,13 +82,13 @@
     (is (= :a2 (test2 [1 2 nil nil nil])))))
 
 (deftest test-private-macro
-  (testing "test1"
+  (testing "private macro"
     (defun- test1
       ([_]))
     (is (:private (meta #'test1)))))
 
 (deftest side-effects
-  (testing "test1"
+  (testing "site-effects"
     (defun test1
       ([1] 1)
       ([x] (println "Square")
@@ -96,3 +96,12 @@
     (with-out-str
       (is (= 4 (test1 2))))
     (is (= "Square") (with-out-str (test1 2)))))
+
+(deftest test-meta
+  (testing "meta"
+    (defun hello
+      "hello world"
+      ([name] (str "hello," name))
+      ([a b] "unknown."))
+    (is (= "hello world" (-> #'hello meta :doc)))
+    (is (= '([name] [a b])) (-> #'hello meta :arglists))))
