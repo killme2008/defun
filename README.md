@@ -7,7 +7,7 @@ A macro to define clojure functions with pattern matching just as erlang or elix
 Dependency in leiningen:
 
 ```clj
-    [defun "0.1.0"]
+    [defun "0.2.0-RC"]
 ```
 
 ### Basic usage
@@ -200,6 +200,26 @@ Matching vector:
 Rest Pattern, Map Pattern, Or Pattern etc.
 
 I don't want to copy the [core.match's wiki](https://github.com/clojure/core.match/wiki/Basic-usage),please visit it by yourself.
+
+### fun and letfun
+
+Since 0.2.0, there are two new macros: `fun` and `letfun`, just like `clojure.core/fn` and `clojure.core/letfn`
+
+```clojure
+((fun
+    ([[_ _ 2]] :a0)
+    ([[1 1 3]] :a1)
+    ([[1 2 3]] :a2))
+  [1 2 3])
+;; :a2
+
+(letfun [(test3 ([[_ _ 2]] :a0)
+                    ([[1 1 3]] :a1)
+                    ([[1 2 3]] :a2))]
+  (test3 [1 2 3]))
+;; :a2
+```
+
 
 ## Criterium benchmarking
 

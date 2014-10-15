@@ -113,7 +113,12 @@
     (is (= 0 ((fun ([] 0) ([a] a) ([a b] b)))))
     (is (= 2 ((fun ([] 0) ([a] a) ([a b] b)) 2)))
     (is (= 1 ((fun ([] 0) ([a] a) ([a b] b)) 1)))
-    (is (= 2 ((fun ([] 0) ([a] a) ([a b] b)) 1 2)))))
+    (is (= 2 ((fun ([] 0) ([a] a) ([a b] b)) 1 2)))
+    (is (= :a2 ((fun
+                 ([[_ _ 2]] :a0)
+                 ([[1 1 3]] :a1)
+                 ([[1 2 3]] :a2))
+                [1 2 3])))))
 
 (deftest test-letfun
   (testing "letfun"
@@ -130,4 +135,8 @@
             (is (= 5050 (accum 100))))
     (is (nil? (resolve 'six-times)))
     (is (nil? (resolve 'twice)))
-    (is (nil? (resolve 'accum)))))
+    (is (nil? (resolve 'accum)))
+    (letfun [(test3 ([[_ _ 2]] :a0)
+                    ([[1 1 3]] :a1)
+                    ([[1 2 3]] :a2))]
+            (is (= :a2) (test3 [1 2 3])))))
