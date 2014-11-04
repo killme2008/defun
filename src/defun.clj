@@ -8,9 +8,7 @@
 
 (defmacro fun
   "Defines a function just like clojure.core/fn with parameter pattern matching.
-   See
-     https://github.com/killme2008/defun
-  for details."
+   See https://github.com/killme2008/defun for details."
   [& sigs]
   {:forms '[(fun name? [params* ] exprs*) (fun name? ([params* ] exprs*)+)]}
   (let [name (when(symbol? (first sigs)) (first sigs))
@@ -52,29 +50,14 @@
 
 (defmacro defun
   "Define a function just like clojure.core/defn, but using core.match to
-  match parameters.See
-    https://github.com/killme2008/defun
-  for details."
+  match parameters. See https://github.com/killme2008/defun for details."
   [name & fdecl]
   (let [[name body] (name-with-attributes name fdecl)
         body (if (vector? (first body))
                (list body)
                body)
-        m (-> name
-              meta
-              (assoc :arglists (list 'quote (@#'clojure.core/sigs body))))
-        body (postwalk
-              (fn [form]
-                (if (and (list? form) (= 'recur (first form)))
-                  (list 'recur (cons 'vector (next form)))
-                  form))
-              body)]
-    `(defn ~name ~m [& args#]
-       (match (vec args#)
-              ~@(mapcat
-                 (fn [[m & more]]
-                   [m (cons 'do more)])
-                 body)))))
+        name (vary-meta name assoc :argslist (list 'quote (@#'clojure.core/sigs body)))]
+    `(def ~name (fun ~@body))))
 
 (defmacro defun-
   "same as defun, yielding non-public def"
