@@ -24,7 +24,7 @@ Use `defun` in your namespace to define function just like `defn`:
 ;; "hello,defun"
 ```
 
-Supports vardic arguments,doc,metadata etc. too.
+Supports variadic arguments, doc, metadata etc. too.
 
 But the fun thing is coming, let's say hi to people:
 
@@ -117,7 +117,7 @@ Added a guard function to parameters:
 (funny 43)
 ;; false
 ```
-Another function to detect if longitude  and latitude values are both valid:
+Another function to detect if longitude and latitude values are both valid:
 
 ```clj
 (defun valid-geopoint?
