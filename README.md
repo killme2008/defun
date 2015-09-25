@@ -230,7 +230,7 @@ Since 0.2.0, there are two new macros: `fun` and `letfun`, just like `clojure.co
 Uses the above function `accum` compared with a normal clojure function:
 
 ``` clj
-(require '[criterium.core :refer [bench])
+(require '[criterium.core :refer [bench]])
 
 (defn accum-defn
     ([n] (accum-defn 0 n))
@@ -242,12 +242,23 @@ Uses the above function `accum` compared with a normal clojure function:
   ([n] (recur n 0)))
 
 (bench (accum-defn 10000))
-;; Execution time mean : 297.433947 µs
+;;Evaluation count : 210480 in 60 samples of 3508 calls.
+;;             Execution time mean : 281.095682 µs
+;;    Execution time std-deviation : 2.526939 µs
+;;   Execution time lower quantile : 277.691624 µs ( 2.5%)
+;;   Execution time upper quantile : 286.618249 µs (97.5%)
+;;                   Overhead used : 1.648269 ns
+
 (bench (accum-defun 10000))
-;; Execution time mean : 4.247483 ms
+;;Evaluation count : 26820 in 60 samples of 447 calls.
+;;             Execution time mean : 2.253477 ms
+;;    Execution time std-deviation : 13.082041 µs
+;;   Execution time lower quantile : 2.235795 ms ( 2.5%)
+;;   Execution time upper quantile : 2.281963 ms (97.5%)
+;;                   Overhead used : 1.648269 ns
 ```
 
-accum-defn is faster than accum-defun. Pattern matching does have a tradeoff.
+accum-defn is much faster than accum-defun. Pattern matching does have a tradeoff.
 
 ## Contributors
 
