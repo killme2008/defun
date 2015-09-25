@@ -6,15 +6,15 @@ A macro to define clojure functions with pattern matching just as erlang or elix
 
 Dependency in leiningen:
 
-```clj
-    [defun "0.2.0-RC"]
+``` clj
+    [defun "0.2.0"]
 ```
 
 ### Basic usage
 
 Use `defun` in your namespace to define function just like `defn`:
 
-```clj
+``` clj
 (use '[defun :only [defun]])
 
 (defun hello
@@ -28,7 +28,7 @@ Supports variadic arguments, doc, metadata etc. too.
 
 But the fun thing is coming, let's say hi to people:
 
-```clj
+``` clj
 (defun say-hi
   ([:dennis] "Hi,good morning, dennis.")
   ([:catty] "Hi, catty, what time is it?")
@@ -38,7 +38,7 @@ But the fun thing is coming, let's say hi to people:
 
 Then calling `say-hi` with different names:
 
-```clj
+``` clj
 (say-hi :dennis)
 ;;  "Hi,good morning, dennis."
 (say-hi :catty)
@@ -48,13 +48,14 @@ Then calling `say-hi` with different names:
 (say-hi "someone")
 ;;  "Say hi to someone"
 ```
+
 We define functions just like Erlang's function with parameters pattern match (thanks to [core.match](https://github.com/clojure/core.match)), we don't need `if,cond,case` any more, that's cool!
 
 ### Recursion
 
 Let's move on, what about define a recursive function? That's easy too:
 
-```clj
+``` clj
 (defun count-down
   ([0] (println "Reach zero!"))
   ([n] (println n)
@@ -63,7 +64,7 @@ Let's move on, what about define a recursive function? That's easy too:
 
 Invoke it:
 
-```clj
+``` clj
 (count-down 5)
 ;;5
 ;;4
@@ -75,7 +76,8 @@ nil
 ```
 
 An accumulator from zero to number `n`:
-```clj
+
+``` clj
     (defun accum
       ([0 ret] ret)
       ([n ret] (recur (dec n) (+ n ret)))
@@ -87,7 +89,7 @@ An accumulator from zero to number `n`:
 
 A fibonacci function:
 
-```clj
+``` clj
 (defun fib
     ([0] 0)
     ([1] 1)
@@ -96,7 +98,7 @@ A fibonacci function:
 
 Output:
 
-```clj
+``` clj
 (fib 10)
 ;; 55
 ```
@@ -107,7 +109,7 @@ Of course it's not tail recursive, but it's really cool, isn't it?
 
 Added a guard function to parameters:
 
-```clj
+``` clj
 (defun funny
   ([(N :guard #(= 42 %))] true)
   ([_] false))
@@ -117,9 +119,10 @@ Added a guard function to parameters:
 (funny 43)
 ;; false
 ```
+
 Another function to detect if longitude and latitude values are both valid:
 
-```clj
+``` clj
 (defun valid-geopoint?
     ([(_ :guard #(and (> % -180) (< % 180)))
       (_ :guard #(and (> % -90) (< % 90)))] true)
@@ -139,7 +142,7 @@ Of course, you can use `defun-` to define a function that is private just as `de
 
 In fact ,the above `say-hi` function will be expanded to be:
 
-```clj
+``` clj
 (defn
  say-hi
  {:arglists '([& args])}
@@ -160,7 +163,7 @@ The argument vector is in fact a pattern in core.match, so we can use all patter
 
 For example, matching literals
 
-```clj
+``` clj
 (defun test1
     ([true false] 1)
     ([true true] 2)
@@ -175,7 +178,7 @@ For example, matching literals
 
 Matching sequence:
 
-```clj
+``` clj
 (defun test2
     ([([1] :seq)] :a0)
     ([([1 2] :seq)] :a1)
@@ -187,7 +190,7 @@ Matching sequence:
 
 Matching vector:
 
-```clj
+``` clj
 (defun test3
     ([[_ _ 2]] :a0)
     ([[1 1 3]] :a1)
@@ -205,7 +208,7 @@ I don't want to copy the [core.match's wiki](https://github.com/clojure/core.mat
 
 Since 0.2.0, there are two new macros: `fun` and `letfun`, just like `clojure.core/fn` and `clojure.core/letfn`
 
-```clojure
+``` clojure
 ((fun
     ([[_ _ 2]] :a0)
     ([[1 1 3]] :a1)
@@ -221,11 +224,12 @@ Since 0.2.0, there are two new macros: `fun` and `letfun`, just like `clojure.co
 ```
 
 
+
 ## Criterium benchmarking
 
 Uses the above function `accum` compared with a normal clojure function:
 
-```clj
+``` clj
 (require '[criterium.core :refer [bench])
 
 (defn accum-defn
@@ -249,12 +253,13 @@ accum-defn is faster than accum-defun. Pattern matching does have a tradeoff.
 
 Thanks .
 
-* [kgann](https://github.com/kgann)
-* [danielcompton](https://github.com/danielcompton)
+- [kgann](https://github.com/kgann)
+- [danielcompton](https://github.com/danielcompton)
 
 ## License
 
 Copyright © 2014 [Dennis Zhuang](mailto:killme2008@gmail.com)
 
 Distributed under the Eclipse Public License either version 1.0 or (at
+
 your option) any later version.
