@@ -1,5 +1,5 @@
-(defproject defun "0.3.0-SNAPSHOT"
-  :description "A beautiful macro to define clojure functions"
+(defproject defun "0.3.0-alapha"
+  :description "A macro to define clojure functions with parameter pattern matching just like erlang or elixir."
   :url "https://github.com/killme2008/defun"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}

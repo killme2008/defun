@@ -2,12 +2,14 @@
 
 A macro to define clojure functions with pattern matching just as erlang or elixir.
 
+**Since 0.3.0, defun supports ClojureScript.**
+
 ## Usage
 
 Dependency in leiningen:
 
 ``` clj
-    [defun "0.2.0"]
+    [defun "0.3.0-alapha"]
 ```
 
 ### Basic usage
@@ -266,6 +268,7 @@ Thanks .
 
 - [kgann](https://github.com/kgann)
 - [danielcompton](https://github.com/danielcompton)
+- [Sander Dijkhuis](https://github.com/sander)
 
 ## License
 

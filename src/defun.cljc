@@ -1,6 +1,8 @@
 (ns
     ^{:author "dennis <killme2008@gmail.com>"
-      :doc "A beautiful macro to define clojure functions"}
+      :doc "A macro to define clojure functions with parameter pattern matching
+            just like erlang or elixir based on core.match. Please see
+            https://github.com/killme2008/defun"}
   defun
   (:require #?(:clj [clojure.core.match]
                :cljs [cljs.core.match :include-macros true])
