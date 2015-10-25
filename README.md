@@ -14,11 +14,23 @@ Dependency in leiningen:
 
 ### Basic usage
 
-Use `defun` in your namespace to define function just like `defn`:
+Require `defun` in clojure:
+
+```clj
+(require '[defun :refer [defun]])
+```
+
+Or `refer-macros` in clojurescript:
+
+```cljs
+(ns cljs-test
+  (:require  [defun :refer-macros [defun]])
+(enable-console-print!)            
+```
+
+Try to define function just like `defn`:
 
 ``` clj
-(use '[defun :only [defun]])
-
 (defun hello
    "hello world"
    [name] (str "hello," name))
@@ -26,9 +38,9 @@ Use `defun` in your namespace to define function just like `defn`:
 ;; "hello,defun"
 ```
 
-Supports variadic arguments, doc, metadata etc. too.
+Supports variadic arguments, doc, metadata etc. as `defun` too. No supprises?
 
-But the fun thing is coming, let's say hi to people:
+The fun thing is coming, let's say hi to people:
 
 ``` clj
 (defun say-hi
