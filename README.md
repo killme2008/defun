@@ -4,14 +4,14 @@ A macro to define clojure functions with pattern matching just as erlang or elix
 
 ## News
 
-* **Since 0.3.0-RC, `defun` namespace is renamed to `defun.core` .**
+* **Since 0.3.0-RC1, `defun` namespace is renamed to `defun.core` .**
 
 ## Usage
 
 Dependency in leiningen:
 
 ``` clj
-    [defun "0.3.0-RC"]
+    [defun "0.3.0-RC1"]
 ```
 
 ### Basic usage
@@ -27,7 +27,7 @@ Or `refer-macros` in clojurescript:
 ```cljs
 (ns cljs-test
   (:require  [defun.core :refer-macros [defun]])
-(enable-console-print!)            
+(enable-console-print!)
 ```
 
 **Since 0.3.0-RC, `defun` namespace is renamed to `defun.core` .**

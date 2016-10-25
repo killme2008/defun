@@ -8,7 +8,7 @@
                :cljs [cljs.core.match :include-macros true])
             #?@(:clj [[clojure.tools.macro :refer [name-with-attributes]]
                       [clojure.walk :refer [postwalk]]]))
-  #?(:cljs (:require-macros [defun :refer [fun letfun defun defun-]])))
+  #?(:cljs (:require-macros [defun.core :refer [fun letfun defun defun-]])))
 
 #?(:clj
    (defmacro if-cljs
