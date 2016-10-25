@@ -1,8 +1,10 @@
 # defun
 
-A macro to define clojure functions with pattern matching just as erlang or elixir.
+A macro to define clojure functions with pattern matching just as erlang or elixir. It supports both clojure and clojurescript.
 
-**Since 0.3.0, defun supports ClojureScript.**
+## News
+
+* **Since 0.3.0-RC, `defun` namespace is renamed to `defun.core` .**
 
 ## Usage
 
