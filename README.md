@@ -9,24 +9,26 @@ A macro to define clojure functions with pattern matching just as erlang or elix
 Dependency in leiningen:
 
 ``` clj
-    [defun "0.3.0-alapha"]
+    [defun "0.3.0-RC"]
 ```
 
 ### Basic usage
 
-Require `defun` in clojure:
+Require `defun.core` in clojure:
 
 ```clj
-(require '[defun :refer [defun]])
+(require '[defun.core :refer [defun]])
 ```
 
 Or `refer-macros` in clojurescript:
 
 ```cljs
 (ns cljs-test
-  (:require  [defun :refer-macros [defun]])
+  (:require  [defun.core :refer-macros [defun]])
 (enable-console-print!)            
 ```
+
+**Since 0.3.0-RC, `defun` namespace is renamed to `defun.core` .**
 
 Try to define function just like `defn`:
 

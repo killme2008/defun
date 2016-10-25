@@ -1,6 +1,6 @@
 (ns defun.core-test
   (:require [clojure.test :refer :all]
-            [defun :refer :all]))
+            [defun.core :refer :all]))
 
 (deftest test-defun-square
   (testing "Normal function."

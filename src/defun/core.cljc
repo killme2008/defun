@@ -3,7 +3,7 @@
       :doc "A macro to define clojure functions with parameter pattern matching
             just like erlang or elixir based on core.match. Please see
             https://github.com/killme2008/defun"}
-  defun
+  defun.core
   (:require #?(:clj [clojure.core.match]
                :cljs [cljs.core.match :include-macros true])
             #?@(:clj [[clojure.tools.macro :refer [name-with-attributes]]
