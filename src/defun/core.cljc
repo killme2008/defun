@@ -35,7 +35,15 @@
            sigs (if (vector? (first sigs))
                   (list sigs)
                   (if (seq? (first sigs))
-                    sigs
+                    (let [sig-args (map first sigs)]
+                      (if-some [[form] (some #(if-not (vector? %) [%]) sig-args)]
+                        (throw (IllegalArgumentException.
+                                (if (some? form)
+                                  (str "Parameter declaration "
+                                       form
+                                       " should be a vector")
+                                  (str "Parameter declaration missing"))))
+                        sigs))
                     ;; Assume single arity syntax
                     (throw (IllegalArgumentException.
                             (if (seq sigs)
