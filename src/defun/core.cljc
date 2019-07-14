@@ -85,7 +85,7 @@
            body (if (vector? (first body))
                   (list body)
                   body)
-           name (vary-meta name assoc :argslist (list 'quote (@#'clojure.core/sigs body)))]
+           name (vary-meta name assoc :arglists (list 'quote (@#'clojure.core/sigs body)))]
        `(def ~name (fun ~@body)))))
 
 #?(:clj
