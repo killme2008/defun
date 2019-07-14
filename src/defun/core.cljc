@@ -30,7 +30,7 @@
      See https://github.com/killme2008/defun for details."
      [& sigs]
      {:forms '[(fun name? [params* ] exprs*) (fun name? ([params* ] exprs*)+)]}
-     (let [name (when(symbol? (first sigs)) (first sigs))
+     (let [name (when (symbol? (first sigs)) (first sigs))
            sigs (if name (next sigs) sigs)
            sigs (if (vector? (first sigs))
                   (list sigs)
@@ -42,7 +42,7 @@
                               (str "Parameter declaration "
                                    (first sigs)
                                    " should be a vector")
-                              (str "Parameter declaration missing"))))))
+                              "Parameter declaration missing")))))
            sigs (postwalk
                  (fn [form]
                    (if (and (list? form) (= 'recur (first form)))
