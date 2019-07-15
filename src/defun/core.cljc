@@ -30,19 +30,27 @@
      See https://github.com/killme2008/defun for details."
      [& sigs]
      {:forms '[(fun name? [params* ] exprs*) (fun name? ([params* ] exprs*)+)]}
-     (let [name (when(symbol? (first sigs)) (first sigs))
+     (let [name (when (symbol? (first sigs)) (first sigs))
            sigs (if name (next sigs) sigs)
            sigs (if (vector? (first sigs))
                   (list sigs)
                   (if (seq? (first sigs))
-                    sigs
+                    (let [sig-args (map first sigs)]
+                      (if-some [[form] (some #(if-not (vector? %) [%]) sig-args)]
+                        (throw (IllegalArgumentException.
+                                (if (some? form)
+                                  (str "Parameter declaration "
+                                       form
+                                       " should be a vector")
+                                  (str "Parameter declaration missing"))))
+                        sigs))
                     ;; Assume single arity syntax
                     (throw (IllegalArgumentException.
                             (if (seq sigs)
                               (str "Parameter declaration "
                                    (first sigs)
                                    " should be a vector")
-                              (str "Parameter declaration missing"))))))
+                              "Parameter declaration missing")))))
            sigs (postwalk
                  (fn [form]
                    (if (and (list? form) (= 'recur (first form)))
@@ -77,7 +85,7 @@
            body (if (vector? (first body))
                   (list body)
                   body)
-           name (vary-meta name assoc :argslist (list 'quote (@#'clojure.core/sigs body)))]
+           name (vary-meta name assoc :arglists (list 'quote (@#'clojure.core/sigs body)))]
        `(def ~name (fun ~@body)))))
 
 #?(:clj

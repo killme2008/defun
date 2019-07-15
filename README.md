@@ -11,7 +11,7 @@ A macro to define clojure functions with pattern matching just as erlang or elix
 Dependency in leiningen:
 
 ``` clj
-    [defun "0.3.0-RC1"]
+    [defun "0.3.1"]
 ```
 
 ### Basic usage
