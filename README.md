@@ -42,7 +42,7 @@ Try to define function just like `defn`:
 ;; "hello,defun"
 ```
 
-Supports variadic arguments, doc, metadata etc. as `defun` too. No supprises?
+Supports variadic arguments, doc, metadata etc. as `defun` too. No surprises?
 
 The fun thing is coming, let's say hi to people:
 
