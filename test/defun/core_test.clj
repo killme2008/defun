@@ -95,7 +95,7 @@
          (* 2 x)))
     (with-out-str
       (is (= 4 (test1 2))))
-    (is (= "Square") (with-out-str (test1 2)))))
+    (is (= "Square\n" (with-out-str (test1 2))))))
 
 (deftest test-meta
   (testing "meta"
@@ -104,7 +104,7 @@
       ([name] (str "hello," name))
       ([a b] "unknown."))
     (is (= "hello world" (-> #'hello meta :doc)))
-    (is (= '([name] [a b])) (-> #'hello meta :arglists))))
+    (is (= '([name] [a b]) (-> #'hello meta :arglists)))))
 
 (deftest test-fun
   (testing "fun"
@@ -131,7 +131,7 @@
               ([n ret] (recur (dec n) (+ n ret)))
               ([n] (recur n 0)))]
             (is (= 30 (twice 15)))
-            (is (= 90) (six-times 15))
+            (is (= 90 (six-times 15)))
             (is (= 5050 (accum 100))))
     (is (nil? (resolve 'six-times)))
     (is (nil? (resolve 'twice)))
@@ -139,4 +139,4 @@
     (letfun [(test3 ([[_ _ 2]] :a0)
                     ([[1 1 3]] :a1)
                     ([[1 2 3]] :a2))]
-            (is (= :a2) (test3 [1 2 3])))))
+            (is (= :a2 (test3 [1 2 3]))))))
