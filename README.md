@@ -1,3 +1,5 @@
+[![Clojure CI](https://github.com/killme2008/defun/actions/workflows/clojure.yml/badge.svg?branch=master)](https://github.com/killme2008/defun/actions/workflows/clojure.yml)
+
 # defun
 
 A macro to define clojure functions with pattern matching just as erlang or elixir. It supports both clojure and clojurescript.
@@ -277,7 +279,7 @@ Thanks .
 - [kgann](https://github.com/kgann)
 - [danielcompton](https://github.com/danielcompton)
 - [Sander Dijkhuis](https://github.com/sander)
-- [@sskorokhodov](https://github.com/sskorokhodov)
+- [sskorokhodov](https://github.com/sskorokhodov)
 
 ## License
 
