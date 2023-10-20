@@ -26,8 +26,6 @@ Or `refer-macros` in clojurescript:
 (enable-console-print!)
 ```
 
-**Since 0.3.0-RC, `defun` namespace is renamed to `defun.core` .**
-
 Try to define function just like `defn`:
 
 ``` clj
@@ -219,8 +217,6 @@ Rest Pattern, Map Pattern, Or Pattern etc.
 I don't want to copy the [core.match's wiki](https://github.com/clojure/core.match/wiki/Basic-usage),please visit it by yourself.
 
 ### fun and letfun
-
-Since 0.2.0, there are two new macros: `fun` and `letfun`, just like `clojure.core/fn` and `clojure.core/letfn`
 
 ``` clojure
 ((fun
