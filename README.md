@@ -90,13 +90,13 @@ nil
 An accumulator from zero to number `n`:
 
 ``` clj
-    (defun accum
-      ([0 ret] ret)
-      ([n ret] (recur (dec n) (+ n ret)))
-      ([n] (recur n 0)))
+(defun accum
+  ([0 ret] ret)
+  ([n ret] (recur (dec n) (+ n ret)))
+  ([n] (recur n 0)))
 
-	 (accum 100)
-	 ;;5050
+(accum 100)
+;;5050
 ```
 
 A fibonacci function:
@@ -277,10 +277,11 @@ Thanks .
 - [kgann](https://github.com/kgann)
 - [danielcompton](https://github.com/danielcompton)
 - [Sander Dijkhuis](https://github.com/sander)
+- [@sskorokhodov](https://github.com/sskorokhodov)
 
 ## License
 
-Copyright © 2014 [Dennis Zhuang](mailto:killme2008@gmail.com)
+Copyright © 2023 [Dennis Zhuang](mailto:killme2008@gmail.com)
 
 Distributed under the Eclipse Public License either version 1.0 or (at
 
