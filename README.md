@@ -2,16 +2,12 @@
 
 A macro to define clojure functions with pattern matching just as erlang or elixir. It supports both clojure and clojurescript.
 
-## News
-
-* **Since 0.3.0-RC1, `defun` namespace is renamed to `defun.core` .**
-
 ## Usage
 
 Dependency in leiningen:
 
 ``` clj
-    [defun "0.3.1"]
+    [defun "0.4.0"]
 ```
 
 ### Basic usage
